@@ -15,6 +15,7 @@
                 <th>Company</th>
                 <th>Role</th>
                 <th>Phone</th>
+                <th>Registered</th>
                 <th>Email</th>
                 <th></th>
             </tr>
@@ -28,6 +29,7 @@
                 <td>{{user.company}}</td>
                 <td>{{user.accessLevel}}</td>
                 <td>{{user.phone}}</td>
+                <td>{{user.registered}}</td>
                 <td>{{user.email}}</td>
                 <td>
                     <router-link :to="{'name':'UserEdit', 'params': {'id': user.id} }">

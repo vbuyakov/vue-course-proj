@@ -63,6 +63,15 @@
             </div>
 
             <div class="form-group">
+                <label class="col-sm-2 control-label" for="registered">Дата регистрации </label>
+                <div class="col-sm-10">
+                <date-picker id="registered" v-model="user.registered"></date-picker>
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
                 <label class="col-sm-2 control-label" for="email">Email</label>
                 <div class="col-sm-10"><input class="form-control" id="email" v-model="user.email" placeholder="Email">
                 </div>
@@ -78,8 +87,10 @@
 <script>
   import cfg from '@/config.js'
   import axios from 'axios'
+  import DatePicker from './datepicker.vue'
 
   export default {
+    components: {DatePicker},
     name: 'UserForm',
     props: {
       'user': {
