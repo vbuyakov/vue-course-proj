@@ -1,7 +1,7 @@
 <template>
     <div>
         <h3>Редактирование пользователя #{{id}}</h3>
-        <user-form v-bind:result="resultMessage" v-model="user"></user-form>
+        <user-form v-bind:result="resultMessage" v-bind:user="user" v-on:save="saveUser"></user-form>
     </div>
 
 </template>
@@ -10,7 +10,7 @@
   import axios from 'axios'
   import UserForm from './UserForm.vue'
 
-  import API_URL from '@/config.js'
+  import cfg from '@/config.js'
 
   export default {
     components: {UserForm},
@@ -24,13 +24,17 @@
     },
     computed: {
       url: function () {
-        return API_URL + '/users/'
+        return cfg.API_URL + '/users/' + this.id
       }
     },
-    watch: {
-      user: function (newVal) {
-        let saveUrl = `${this.url}${this.id}`
-        axios.put(saveUrl, newVal).then(
+    mounted () {
+      axios.get(this.url).then((res) => {
+        this.user = res.data
+      })
+    },
+    methods: {
+      saveUser: function (newVal) {
+        axios.put(this.url, newVal).then(
           () => {
             this.resultMessage = {'type': 'success', 'msg': 'Пользователь успешно сохранен'}
           },
@@ -38,12 +42,6 @@
             this.resultMessage = {'type': 'error', 'msg': 'При сохранении произошла ошибка'}
           })
       }
-    },
-    mounted () {
-      let getUrl = `${this.url}${this.id}`
-      axios.get(getUrl).then((res) => {
-        this.user = res.data
-      })
     }
   }
 </script>

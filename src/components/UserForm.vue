@@ -20,6 +20,25 @@
                                               placeholder="Last Name"></div>
             </div>
 
+            <div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="picture">Avatar</label>
+                    <div class="col-sm-10">
+                        <p class="text-left">
+
+                            <img :src="user.picture" class="img-thumbnail">
+                        </p>
+                        <input type="text" class="form-control" id="picture" v-model="user.picture"
+                               placeholder="picture">
+                        <input type="file" class="hidden" ref="image" @change="upload">
+                        <button v-if="!isUploading" class="btn btn-sm pull-left" type="button" @click="selectNewImage">Выбрать новую картинку</button>
+                        <div v-else class="pull-left">Загружется <i class="fa fa fa-spinner fa-spin"></i></div>
+
+
+                    </div>
+                </div>
+            </div>
+
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="age">Age</label>
                 <div class="col-sm-10"><input class="form-control" id="age" v-model="user.age" placeholder="age"></div>
@@ -57,13 +76,21 @@
 </template>
 
 <script>
+  import cfg from '@/config.js'
+  import axios from 'axios'
+
   export default {
     name: 'UserForm',
-    props: ['value', 'result'],
+    props: {
+      'user': {
+        default: {}
+      },
+      'result': {}
+    },
     data () {
       return {
         isResultAlert: false,
-        user: {}
+        isUploading: false
       }
     },
     computed: {
@@ -73,10 +100,32 @@
     },
     methods: {
       submitForm: function () {
-        this.$emit('input', this.user)
+        this.$emit('save', this.user)
       },
       hideAlert: function () {
         this.isResultAlert = false
+      },
+      selectNewImage: function () {
+        this.$refs.image.click()
+      },
+      upload: function () {
+        this.isUploading = true
+        const url = 'https://api.imgur.com/3/image'
+        const data = new FormData()
+        data.append('image', this.$refs.image.files[0])
+
+        const config = {
+          headers: {
+            'Authorization': `Client-ID ${cfg.IMGUR.clientId}`
+          }
+        }
+        axios.post(url, data, config).then(
+          (res) => {
+            this.isUploading = false
+            this.user['picture'] = res.data.data.link
+            this.$refs.image.value = ''
+          }
+        )
       }
     },
     watch: {
@@ -84,9 +133,6 @@
         this.isResultAlert = !!newResult
         setTimeout(() => { this.isResultAlert = false }, 2500)
       }
-    },
-    mounted () {
-      this.user = Object.assign({}, this.value)
     }
   }
 </script>

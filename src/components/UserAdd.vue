@@ -2,7 +2,7 @@
     <div>
         <h3>Создать нового пользователя</h3>
         <div v-if="!isUserCreated">
-            <user-form v-bind:result="resultMessage" v-model="user"></user-form>
+            <user-form v-bind:result="resultMessage"  v-bind:user="user" v-on:save="saveUser"></user-form>
         </div>
 
         <div v-if="isUserCreated">
@@ -22,7 +22,7 @@
 <script>
   import axios from 'axios'
   import UserForm from './UserForm.vue'
-  import API_URL from '@/config.js'
+  import cfg from '@/config.js'
 
   export default {
     name: 'UserAdd',
@@ -36,18 +36,16 @@
     },
     computed: {
       url: function () {
-        return API_URL + '/users'
+        return cfg.API_URL + '/users'
       }
     },
     methods: {
       createNew: function () {
+        this.user = {}
         this.isUserCreated = false
-      }
-    },
-    watch: {
-      user: function (newVal) {
-        let saveUrl = `${this.url}`
-        axios.post(saveUrl, newVal).then(
+      },
+      saveUser: function (newVal) {
+        axios.post(this.url, newVal).then(
           () => {
             this.isUserCreated = true
           },
@@ -56,7 +54,6 @@
           })
       }
     }
-
   }
 </script>
 
