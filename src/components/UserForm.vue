@@ -59,20 +59,11 @@
 <script>
   export default {
     name: 'UserForm',
-    props: {
-      'user': {
-        default: function () {
-          return {}
-        },
-        type: Object
-      },
-      'result': {
-        type: Object
-      }
-    },
+    props: ['value', 'result'],
     data () {
       return {
-        isResultAlert: false
+        isResultAlert: false,
+        user: {}
       }
     },
     computed: {
@@ -82,7 +73,7 @@
     },
     methods: {
       submitForm: function () {
-        this.$emit('saveUser', this.user)
+        this.$emit('input', this.user)
       },
       hideAlert: function () {
         this.isResultAlert = false
@@ -93,6 +84,9 @@
         this.isResultAlert = !!newResult
         setTimeout(() => { this.isResultAlert = false }, 2500)
       }
+    },
+    mounted () {
+      this.user = Object.assign({}, this.value)
     }
   }
 </script>

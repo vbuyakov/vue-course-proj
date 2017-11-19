@@ -28,12 +28,12 @@
         currentPage: 1
       }
     },
-    props: ['pages'],
+    props: ['pages', 'value'],
     methods: {
       setPage: function (page) {
         if (page < 1 || page > this.pages) return
         this.currentPage = page
-        this.$emit('change', page)
+        this.$emit('input', page)
       }
     },
     watch: {

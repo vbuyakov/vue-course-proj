@@ -24,7 +24,7 @@
     },
     watch: {
       currentCount: function (newCount) {
-        this.$emit('change', newCount)
+        this.$emit('input', newCount)
       }
     }
   }

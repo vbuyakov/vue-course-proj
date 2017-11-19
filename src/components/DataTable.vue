@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="row">
-            <items-on-page class="pull-left m-5-right" v-on:change="setPageSize"></items-on-page>
+            <items-on-page class="pull-left m-5-right" v-model="pagesize"></items-on-page>
             <div class="pull-left m-5-left">Всего пользователей: <b>{{totalCount}}</b></div>
         </div>
 
@@ -38,7 +38,7 @@
             </tr>
             </tbody>
         </table>
-        <paginator v-bind:pages="totalPages" v-on:change="setPage"></paginator>
+        <paginator v-bind:pages="totalPages" v-model="page"></paginator>
     </div>
 </template>
 
@@ -82,14 +82,14 @@
             this.getUsers()
           })
         }
-      },
-      setPageSize: function (size) {
+      }
+    },
+    watch: {
+      pagesize: function () {
         this.page = 1
-        this.pagesize = size
         this.getUsers()
       },
-      setPage: function (page) {
-        this.page = page
+      page: function () {
         this.getUsers()
       }
     },
