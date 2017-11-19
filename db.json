@@ -305,22 +305,6 @@
       "registered": "2016-05-01T03:51:56 -03:00"
     },
     {
-      "id": 23,
-      "isActive": true,
-      "balance": "$3,953.40",
-      "picture": "http://placehold.it/32x32",
-      "age": 27,
-      "accessLevel": "boss",
-      "firstName": "Burke",
-      "lastName": "Hansen",
-      "company": "SCENTY",
-      "email": "burkehansen@scenty.com",
-      "phone": "+1 (939) 506-3866",
-      "address": "204 Richards Street, Benson, Connecticut, 1645",
-      "about": "Nulla fugiat adipisicing dolore minim velit tempor elit qui pariatur ullamco qui. Duis cillum aliquip qui minim ipsum. Ut pariatur eu cillum aute ipsum et dolore aliqua ad enim commodo Lorem. Tempor Lorem consequat in eiusmod in commodo minim dolore incididunt. Cupidatat minim labore occaecat pariatur nisi sit enim nisi enim minim velit culpa pariatur nostrud. Velit dolor ullamco ullamco irure elit ea. Laborum et laboris eu id excepteur quis amet dolore id qui do qui cillum.\r\n",
-      "registered": "2017-09-19T05:33:12 -03:00"
-    },
-    {
       "id": 24,
       "isActive": true,
       "balance": "$1,714.47",
@@ -465,7 +449,7 @@
       "registered": "2016-04-15T01:08:03 -03:00"
     },
     {
-      "firstName": "TEST",
+      "firstName": "TESTzzzz",
       "lastName": "TEST",
       "age": "22",
       "company": "TEST",
@@ -473,26 +457,6 @@
       "phone": "987609876987",
       "email": "uyuy@jhjh.xx",
       "id": 33
-    },
-    {
-      "firstName": "test1",
-      "lastName": "test1",
-      "age": "23",
-      "company": "test1",
-      "accessLevel": "test1",
-      "phone": "876876876",
-      "email": "yut@crimea.com.ua",
-      "id": 34
-    },
-    {
-      "firstName": "test3",
-      "lastName": "test3",
-      "age": "24",
-      "company": "test3",
-      "accessLevel": "test3",
-      "phone": "876876876",
-      "email": "tss@ssdsd.ee",
-      "id": 35
     }
   ]
 }
