@@ -32,6 +32,7 @@
         resultMessage: null,
         isUserCreated: false,
         user: {
+          'id': '',
           'bithday': ''
         }
       }

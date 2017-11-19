@@ -7,7 +7,7 @@
             <button type="button" class="close" data-dismiss="alert" aria-label="Close" v-on:click="hideAlert"><span
                     aria-hidden="true">×</span></button>
         </div>
-        <form class="form-horizontal">
+        <form class="form-horizontal" v-if="isLoaded">
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="firstName">First Name</label>
                 <div class="col-sm-10"><input class="form-control" id="firstName" v-model="user.firstName"
@@ -31,7 +31,9 @@
                         <input type="text" class="form-control" id="picture" v-model="user.picture"
                                placeholder="picture">
                         <input type="file" class="hidden" ref="image" @change="upload">
-                        <button v-if="!isUploading" class="btn btn-sm pull-left" type="button" @click="selectNewImage">Выбрать новую картинку</button>
+                        <button v-if="!isUploading" class="btn btn-sm pull-left" type="button" @click="selectNewImage">
+                            Выбрать новую картинку
+                        </button>
                         <div v-else class="pull-left">Загружется <i class="fa fa fa-spinner fa-spin"></i></div>
 
 
@@ -65,7 +67,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="registered">Дата рождения </label>
                 <div class="col-sm-10">
-                <date-picker id="registered" v-model="user.bithday"></date-picker>
+                    <date-picker id="registered" v-model="user.bithday"></date-picker>
                 </div>
 
             </div>
@@ -84,6 +86,14 @@
                 </div>
             </div>
 
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="email">О пользователе</label>
+                <div class="col-sm-10">
+                    <medium-editor v-model="user.about"></medium-editor>
+                </div>
+            </div>
+
             <button type="button" class="btn btn-success" v-on:click="submitForm">
                 Сохранить
             </button>
@@ -96,11 +106,14 @@
   import axios from 'axios'
   import DatePicker from './datepicker.vue'
   import CheckboxPro from './checkboxPro.vue'
+  import MediumEditor from './mediumEditor.vue'
 
   export default {
     components: {
+      MediumEditor,
       CheckboxPro,
-      DatePicker},
+      DatePicker
+    },
     name: 'UserForm',
     props: {
       'user': {
@@ -117,6 +130,12 @@
     computed: {
       alertStyle: function () {
         return 'alert-' + (this.result.type === 'error' ? 'danger' : this.result.type)
+      },
+      isLoaded: function () {
+        if (this.user.hasOwnProperty('id') && this.user.id != null) {
+          return true
+        }
+        return false
       }
     },
     methods: {

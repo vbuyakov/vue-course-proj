@@ -12,8 +12,7 @@
     name: 'DatePicker',
     props: {
       'value': {
-        type: String,
-        required: true
+        type: String
       }
     },
     date: () => ({
@@ -31,6 +30,11 @@
           this.$emit('input', dateStr)
         }
       })
+    },
+    watch: {
+      value: function () {
+        this.updatePicker()
+      }
     }
   }
 </script>

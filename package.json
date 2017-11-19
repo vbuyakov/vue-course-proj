@@ -17,6 +17,7 @@
     "flatpickr": "^4.1.2",
     "font-awesome": "^4.7.0",
     "json-server": "^0.12.1",
+    "medium-editor": "^5.23.2",
     "pretty-checkbox": "^3.0.3",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
