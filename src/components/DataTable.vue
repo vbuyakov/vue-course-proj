@@ -15,8 +15,9 @@
                 <th>Company</th>
                 <th>Role</th>
                 <th>Phone</th>
-                <th>Registered</th>
+                <th>Birth</th>
                 <th>Email</th>
+                <th>Active</th>
                 <th></th>
             </tr>
             </thead>
@@ -29,8 +30,9 @@
                 <td>{{user.company}}</td>
                 <td>{{user.accessLevel}}</td>
                 <td>{{user.phone}}</td>
-                <td>{{user.registered}}</td>
+                <td>{{user.bithday}}</td>
                 <td>{{user.email}}</td>
+                <td>{{user.isActive ? 'Yes' : 'No'}}</td>
                 <td>
                     <router-link :to="{'name':'UserEdit', 'params': {'id': user.id} }">
                         <a title="Редактировать" class="m-5-right"><i class="fa fa-edit"></i> </a>

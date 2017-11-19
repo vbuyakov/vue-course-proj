@@ -63,9 +63,9 @@
             </div>
 
             <div class="form-group">
-                <label class="col-sm-2 control-label" for="registered">Дата регистрации </label>
+                <label class="col-sm-2 control-label" for="registered">Дата рождения </label>
                 <div class="col-sm-10">
-                <date-picker id="registered" v-model="user.registered"></date-picker>
+                <date-picker id="registered" v-model="user.bithday"></date-picker>
                 </div>
 
             </div>
@@ -74,6 +74,13 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="email">Email</label>
                 <div class="col-sm-10"><input class="form-control" id="email" v-model="user.email" placeholder="Email">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="email">Активность</label>
+                <div class="col-sm-10">
+                    <checkbox-pro v-model="user.isActive"></checkbox-pro>
                 </div>
             </div>
 
@@ -88,9 +95,12 @@
   import cfg from '@/config.js'
   import axios from 'axios'
   import DatePicker from './datepicker.vue'
+  import CheckboxPro from './checkboxPro.vue'
 
   export default {
-    components: {DatePicker},
+    components: {
+      CheckboxPro,
+      DatePicker},
     name: 'UserForm',
     props: {
       'user': {

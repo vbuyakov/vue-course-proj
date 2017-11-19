@@ -31,7 +31,9 @@
       return {
         resultMessage: null,
         isUserCreated: false,
-        user: {}
+        user: {
+          'bithday': ''
+        }
       }
     },
     computed: {

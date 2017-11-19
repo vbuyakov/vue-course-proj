@@ -10,7 +10,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">Vue.Js cource project</a>
+                    <router-link to="/">
+                    <a class="navbar-brand">Vue.Js cource project</a>
+                    </router-link>
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
