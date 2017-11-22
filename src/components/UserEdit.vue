@@ -1,7 +1,13 @@
 <template>
     <div>
         <h3>Редактирование пользователя #{{id}}</h3>
-        <user-form v-bind:result="resultMessage" v-bind:user="user" v-on:save="saveUser"></user-form>
+        <user-form v-bind:result="resultMessage" v-model="user">
+          <div slot="actions">
+            <button type="button" class="btn btn-success" v-on:click="saveUser">
+                Сохранить
+            </button>
+          </div>
+        </user-form>
     </div>
 
 </template>
@@ -15,7 +21,11 @@
   export default {
     components: {UserForm},
     name: 'UserEdit',
-    props: ['id'],
+    props: {
+      id: {
+        required: true
+      }
+    },
     data () {
       return {
         user: {},
@@ -33,8 +43,8 @@
       })
     },
     methods: {
-      saveUser: function (newVal) {
-        axios.put(this.url, newVal).then(
+      saveUser: function () {
+        axios.put(this.url, this.user).then(
           () => {
             this.resultMessage = {'type': 'success', 'msg': 'Пользователь успешно сохранен'}
           },
@@ -45,6 +55,3 @@
     }
   }
 </script>
-
-<style scoped>
-</style>

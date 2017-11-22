@@ -13,11 +13,8 @@
   export default {
     name: 'checkboxPro',
     props: ['label', 'value'],
-    data: () => ({
-      conponentValue: false
-    }),
-    mounted () {
-      this.conponentValue = this.value
+    computed: {
+      conponentValue: this.value
     },
     watch: {
       conponentValue: function (newVal) {
@@ -26,6 +23,3 @@
     }
   }
 </script>
-
-<style scoped>
-</style>

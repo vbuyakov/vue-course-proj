@@ -16,9 +16,11 @@
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <router-link to="/" tag="li" active-class="active" exact><a>Список пользователей</a>
+                        <router-link to="/users" tag="li" active-class="active" exact>
+                            <a>Список пользователей</a>
                         </router-link>
-                        <router-link to="/user/add" tag="li" active-class="active" exact><a>Добавить пользователя</a>
+                        <router-link to="/user/add" tag="li" active-class="active" exact>
+                            <a>Добавить пользователя</a>
                         </router-link>
                     </ul>
                 </div>
@@ -56,6 +58,4 @@
     .m-5-right {
         margin-right: 5px;
     }
-
-
 </style>

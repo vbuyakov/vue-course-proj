@@ -1,10 +1,6 @@
 <template>
     <div>
         <h3>Создать нового пользователя</h3>
-        <div v-if="!isUserCreated">
-            <user-form v-bind:result="resultMessage"  v-bind:user="user" v-on:save="saveUser"></user-form>
-        </div>
-
         <div v-if="isUserCreated">
             <div
                     class="alert alert-success"
@@ -16,6 +12,16 @@
                 <a class="btn btn-default">Перейти к списку</a>
             </router-link>
         </div>
+        <div v-else>
+            <user-form v-bind:result="resultMessage"  v-model="user">
+                <div slot="actions">
+                    <button type="button" class="btn btn-success" v-on:click="saveUser">
+                        Создать пользователя
+                    </button>
+                </div>
+            </user-form>
+        </div>
+
     </div>
 </template>
 
@@ -24,6 +30,23 @@
   import UserForm from './UserForm.vue'
   import cfg from '@/config.js'
 
+  const TUser = {
+    id: '',
+    isActive: false,
+    balance: 0,
+    picture: 'http://placehold.it/32x32',
+    age: '',
+    accessLevel: 'USER',
+    firstName: '',
+    lastName: '',
+    company: '',
+    email: '',
+    phone: '',
+    address: '',
+    about: '',
+    bithday: ''
+  }
+
   export default {
     name: 'UserAdd',
     components: {UserForm},
@@ -31,10 +54,7 @@
       return {
         resultMessage: null,
         isUserCreated: false,
-        user: {
-          'id': '',
-          'bithday': ''
-        }
+        user: TUser
       }
     },
     computed: {
@@ -47,8 +67,8 @@
         this.user = {}
         this.isUserCreated = false
       },
-      saveUser: function (newVal) {
-        axios.post(this.url, newVal).then(
+      saveUser: function () {
+        axios.post(this.url, this.user).then(
           () => {
             this.isUserCreated = true
           },
@@ -59,6 +79,3 @@
     }
   }
 </script>
-
-<style scoped>
-</style>

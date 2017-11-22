@@ -59,22 +59,29 @@
     name: 'DataTable',
     data: function () {
       return {
-        url: 'http://localhost:3000/users/',
         pagesize: 5,
         page: 1,
-        users: null,
-        totalCount: null
+        users: [],
+        totalCount: 0
+      }
+    },
+    props: {
+      apiUrl: {
+        required: true,
+        type: String
       }
     },
     computed: {
       totalPages: function () {
         return Math.ceil(this.totalCount / this.pagesize)
+      },
+      getUrl: function () {
+        return `${this.apiUrl}?_page=${this.page}&_limit=${this.pagesize}`
       }
     },
     methods: {
       getUsers: function () {
-        let getUrl = `${this.url}?_page=${this.page}&_limit=${this.pagesize}`
-        axios.get(getUrl).then((res) => {
+        axios.get(this.getUrl).then((res) => {
           this.users = res.data
           this.totalCount = res.headers['x-total-count']
         })
@@ -91,7 +98,6 @@
     watch: {
       pagesize: function () {
         this.page = 1
-        this.getUsers()
       },
       page: function () {
         this.getUsers()
@@ -102,6 +108,3 @@
     }
   }
 </script>
-
-<style>
-</style>

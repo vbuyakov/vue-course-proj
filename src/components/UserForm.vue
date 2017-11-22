@@ -93,33 +93,31 @@
                     <medium-editor v-model="user.about"></medium-editor>
                 </div>
             </div>
-
-            <button type="button" class="btn btn-success" v-on:click="submitForm">
-                Сохранить
-            </button>
         </form>
+        <slot name="actions"></slot>
     </div>
 </template>
 
 <script>
   import cfg from '@/config.js'
   import axios from 'axios'
-  import DatePicker from './datepicker.vue'
-  import CheckboxPro from './checkboxPro.vue'
-  import MediumEditor from './mediumEditor.vue'
 
   export default {
     components: {
-      MediumEditor,
-      CheckboxPro,
-      DatePicker
+      MediumEditor: () => import('./mediumEditor.vue'),
+      CheckboxPro: () => import('./checkboxPro.vue'),
+      DatePicker: () => import('./datepicker.vue')
     },
     name: 'UserForm',
     props: {
       'user': {
-        default: {}
+        type: Object,
+        required: true
       },
       'result': {}
+    },
+    model: {
+      prop: 'user'
     },
     data () {
       return {
@@ -132,16 +130,10 @@
         return 'alert-' + (this.result.type === 'error' ? 'danger' : this.result.type)
       },
       isLoaded: function () {
-        if (this.user.hasOwnProperty('id') && this.user.id != null) {
-          return true
-        }
-        return false
+        return (this.user.hasOwnProperty('id') && this.user.id != null)
       }
     },
     methods: {
-      submitForm: function () {
-        this.$emit('save', this.user)
-      },
       hideAlert: function () {
         this.isResultAlert = false
       },
@@ -162,7 +154,7 @@
         axios.post(url, data, config).then(
           (res) => {
             this.isUploading = false
-            this.user['picture'] = res.data.data.link
+            this.user.picture = res.data.data.link
             this.$refs.image.value = ''
           }
         )
@@ -176,6 +168,3 @@
     }
   }
 </script>
-
-<style scoped>
-</style>

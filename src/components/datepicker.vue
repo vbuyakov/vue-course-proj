@@ -12,7 +12,8 @@
     name: 'DatePicker',
     props: {
       'value': {
-        type: String
+        type: String,
+        required: true
       }
     },
     date: () => ({
@@ -38,6 +39,3 @@
     }
   }
 </script>
-
-<style scoped>
-</style>

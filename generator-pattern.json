@@ -7,7 +7,7 @@
     picture: 'http://placehold.it/32x32',
     age: '{{integer(20, 40)}}',
     accessLevel: 'user',
-    firstNem: '{{firstName()}}',
+    firstName: '{{firstName()}}',
     lastName: '{{surname()}}',
     company: '{{company().toUpperCase()}}',
     email: '{{email()}}',
