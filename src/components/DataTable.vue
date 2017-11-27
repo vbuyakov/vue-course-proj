@@ -88,9 +88,10 @@
       },
       deleteUser: function (id) {
         if (confirm(`Действительно хотите удалить пользователя с ID: ${id}?`)) {
-          let deleteUrl = `${this.url}/${id}`
+          let deleteUrl = `${this.apiUrl}/${id}`
           axios.delete(deleteUrl).then((res) => {
             this.getUsers()
+            this.$store.commit('alert', {'type': 'success', 'msg': 'Пользователь успешно удалён'})
           })
         }
       }

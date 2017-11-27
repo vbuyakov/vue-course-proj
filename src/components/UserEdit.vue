@@ -46,10 +46,10 @@
       saveUser: function () {
         axios.put(this.url, this.user).then(
           () => {
-            this.resultMessage = {'type': 'success', 'msg': 'Пользователь успешно сохранен'}
+            this.$store.commit('alert', {'type': 'success', 'msg': 'Пользователь успешно сохранен'})
           },
           () => {
-            this.resultMessage = {'type': 'error', 'msg': 'При сохранении произошла ошибка'}
+            this.$store.commit('alert', {'type': 'error', 'msg': 'При сохранении произошла ошибка'})
           })
       }
     }

@@ -1,6 +1,6 @@
 <template>
     <div class="pretty p-switch p-fill pull-left">
-        <input type="checkbox" v-model="conponentValue"/>
+        <input type="checkbox" v-model="checkboxValue"/>
         <div class="state">
             <label>{{label}}</label>
         </div>
@@ -12,13 +12,28 @@
 
   export default {
     name: 'checkboxPro',
-    props: ['label', 'value'],
-    computed: {
-      conponentValue: this.value
+    props: {
+      label: {
+        default: ''
+      },
+      value: {
+        default: false
+      }
+    },
+    data: function () {
+      return {
+        checkboxValue: false
+      }
+    },
+    mounted: function () {
+      this.checkboxValue = this.value
     },
     watch: {
-      conponentValue: function (newVal) {
-        this.$emit('input', newVal)
+      value: function () {
+        this.checkboxValue = this.value
+      },
+      checkboxValue: function () {
+        this.$emit('input', this.checkboxValue)
       }
     }
   }

@@ -64,16 +64,17 @@
     },
     methods: {
       createNew: function () {
-        this.user = {}
+        this.user = TUser
         this.isUserCreated = false
       },
       saveUser: function () {
         axios.post(this.url, this.user).then(
           () => {
             this.isUserCreated = true
+            this.$store.commit('alert', {'type': 'success', 'msg': 'Пользователь создан'})
           },
           () => {
-            this.resultMessage = {'type': 'error', 'msg': 'При создании пользователя произошла ошибка'}
+            this.$store.commit('alert', {'type': 'error', 'msg': 'При создании пользователя произошла ошибка'})
           })
       }
     }

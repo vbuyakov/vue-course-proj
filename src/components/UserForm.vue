@@ -1,12 +1,5 @@
 <template>
     <div>
-        <div v-if="isResultAlert"
-             class="alert" v-bind:class="alertStyle"
-             role="alert">
-            {{ result.msg }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close" v-on:click="hideAlert"><span
-                    aria-hidden="true">×</span></button>
-        </div>
         <form class="form-horizontal" v-if="isLoaded">
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="firstName">First Name</label>
@@ -101,11 +94,12 @@
 <script>
   import cfg from '@/config.js'
   import axios from 'axios'
+  import CheckboxPro from './checkboxPro.vue'
 
   export default {
     components: {
+      CheckboxPro,
       MediumEditor: () => import('./mediumEditor.vue'),
-      CheckboxPro: () => import('./checkboxPro.vue'),
       DatePicker: () => import('./datepicker.vue')
     },
     name: 'UserForm',
@@ -126,17 +120,11 @@
       }
     },
     computed: {
-      alertStyle: function () {
-        return 'alert-' + (this.result.type === 'error' ? 'danger' : this.result.type)
-      },
       isLoaded: function () {
         return (this.user.hasOwnProperty('id') && this.user.id != null)
       }
     },
     methods: {
-      hideAlert: function () {
-        this.isResultAlert = false
-      },
       selectNewImage: function () {
         this.$refs.image.click()
       },
@@ -158,12 +146,6 @@
             this.$refs.image.value = ''
           }
         )
-      }
-    },
-    watch: {
-      result: function (newResult) {
-        this.isResultAlert = !!newResult
-        setTimeout(() => { this.isResultAlert = false }, 2500)
       }
     }
   }

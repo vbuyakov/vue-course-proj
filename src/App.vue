@@ -1,5 +1,7 @@
 <template>
     <div id="app">
+       <alert></alert>
+
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -11,7 +13,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <router-link to="/">
-                    <a class="navbar-brand">Vue.Js cource project</a>
+                        <a class="navbar-brand">Vue.Js cource project</a>
                     </router-link>
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
@@ -37,7 +39,10 @@
 </template>
 
 <script>
+  import Alert from './components/alert.vue'
+
   export default {
+    components: {Alert},
     name: 'app'
   }
 </script>
