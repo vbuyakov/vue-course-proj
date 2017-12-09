@@ -47,7 +47,7 @@
     },
     watch: {
       value: function () {
-        this.currentPage = this.value
+        this.currentPage = (this.value < this.pages) ? this.value : this.pages
       }
     }
   }
