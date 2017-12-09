@@ -9,12 +9,8 @@ export default new Vuex.Store({
     type: '',
     updated: null
   },
-  getters: {
-    message: state => state.message,
-    type: state => state.type
-  },
   mutations: {
-    alert (state, payload) {
+    appMessaging (state, payload) {
       state.message = payload.msg
       state.type = payload.type || 'info'
       state.updated = Date.now()

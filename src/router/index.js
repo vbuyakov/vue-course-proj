@@ -4,26 +4,13 @@ import Index from '@/components/Index'
 
 Vue.use(Router)
 
-const UsersList = resolve => {
-  require.ensure([], () => {
-    resolve(require('@/components/UsersList.vue'))
-  })
-}
-
-const UserAdd = resolve => {
-  require.ensure([], () => {
-    resolve(require('@/components/UserAdd.vue'))
-  })
-}
-
-const UserEdit = resolve => {
-  require.ensure([], () => {
-    resolve(require('@/components/UserEdit.vue'))
-  })
-}
+const UsersList = () => import('@/components/UsersList.vue')
+const UserAdd = () => import('@/components/UserAdd.vue')
+const UserEdit = () => import('@/components/UserEdit.vue')
 
 export default new Router({
   mode: 'history',
+  linkActiveClass: 'active',
   routes: [
     {
       path: '/',

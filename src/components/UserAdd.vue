@@ -27,7 +27,6 @@
 
 <script>
   import axios from 'axios'
-  import UserForm from './UserForm.vue'
   import cfg from '@/config.js'
 
   const TUser = {
@@ -49,12 +48,14 @@
 
   export default {
     name: 'UserAdd',
-    components: {UserForm},
+    components: {
+      UserForm: () => import('./UserForm.vue')
+    },
     data () {
       return {
         resultMessage: null,
         isUserCreated: false,
-        user: TUser
+        user: Object.assign({}, TUser)
       }
     },
     computed: {
@@ -64,17 +65,17 @@
     },
     methods: {
       createNew: function () {
-        this.user = TUser
+        this.user = Object.assign({}, TUser)
         this.isUserCreated = false
       },
       saveUser: function () {
         axios.post(this.url, this.user).then(
           () => {
             this.isUserCreated = true
-            this.$store.commit('alert', {'type': 'success', 'msg': 'Пользователь создан'})
+            this.$store.commit('appMessaging', {'type': 'success', 'msg': 'Пользователь создан'})
           },
           () => {
-            this.$store.commit('alert', {'type': 'error', 'msg': 'При создании пользователя произошла ошибка'})
+            this.$store.commit('appMessaging', {'type': 'error', 'msg': 'При создании пользователя произошла ошибка'})
           })
       }
     }

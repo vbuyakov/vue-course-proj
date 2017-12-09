@@ -28,7 +28,16 @@
         currentPage: 1
       }
     },
-    props: ['pages', 'value'],
+    props: {
+      pages: {
+        required: true,
+        type: Number
+      },
+      value: {
+        default: 1,
+        type: Number
+      }
+    },
     methods: {
       setPage: function (page) {
         if (page < 1 || page > this.pages) return
@@ -37,8 +46,8 @@
       }
     },
     watch: {
-      pages: function () {
-        this.currentPage = 1
+      value: function () {
+        this.currentPage = this.value
       }
     }
   }

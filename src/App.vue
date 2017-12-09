@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-       <alert></alert>
+        <app-message></app-message>
 
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
@@ -18,10 +18,10 @@
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <router-link to="/users" tag="li" active-class="active" exact>
+                        <router-link to="/users" tag="li" exact>
                             <a>Список пользователей</a>
                         </router-link>
-                        <router-link to="/user/add" tag="li" active-class="active" exact>
+                        <router-link to="/user/add" tag="li" exact>
                             <a>Добавить пользователя</a>
                         </router-link>
                     </ul>
@@ -39,10 +39,12 @@
 </template>
 
 <script>
-  import Alert from './components/alert.vue'
+  import AppMessage from './components/appMessage.vue'
 
   export default {
-    components: {Alert},
+    components: {
+      AppMessage
+    },
     name: 'app'
   }
 </script>

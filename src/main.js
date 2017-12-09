@@ -1,4 +1,4 @@
-// import 'bootstrap/dist/css/bootstrap-theme.css'
+import 'bootstrap/dist/css/bootstrap-theme.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'font-awesome/css/font-awesome.css'
 

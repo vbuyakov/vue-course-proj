@@ -22,7 +22,15 @@
         type: Number
       }
     },
+    computed: {
+      cachedvalue: function () {
+        return this.value
+      }
+    },
     watch: {
+      cachedvalue: function () {
+        this.currentCount = this.cachedvalue
+      },
       currentCount: function (newCount) {
         this.$emit('input', newCount)
       }

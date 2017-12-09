@@ -17,19 +17,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="picture">Avatar</label>
                     <div class="col-sm-10">
-                        <p class="text-left">
-
-                            <img :src="user.picture" class="img-thumbnail">
-                        </p>
-                        <input type="text" class="form-control" id="picture" v-model="user.picture"
-                               placeholder="picture">
-                        <input type="file" class="hidden" ref="image" @change="upload">
-                        <button v-if="!isUploading" class="btn btn-sm pull-left" type="button" @click="selectNewImage">
-                            Выбрать новую картинку
-                        </button>
-                        <div v-else class="pull-left">Загружется <i class="fa fa fa-spinner fa-spin"></i></div>
-
-
+                       <image-uploader v-model="user.picture" :clientId="clientId" id="picture"></image-uploader>
                     </div>
                 </div>
             </div>
@@ -65,7 +53,6 @@
 
             </div>
 
-
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="email">Email</label>
                 <div class="col-sm-10"><input class="form-control" id="email" v-model="user.email" placeholder="Email">
@@ -78,7 +65,6 @@
                     <checkbox-pro v-model="user.isActive"></checkbox-pro>
                 </div>
             </div>
-
 
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="email">О пользователе</label>
@@ -93,12 +79,10 @@
 
 <script>
   import cfg from '@/config.js'
-  import axios from 'axios'
-  import CheckboxPro from './checkboxPro.vue'
-
   export default {
     components: {
-      CheckboxPro,
+      ImageUploader: () => import('./imageUploader.vue'),
+      CheckboxPro: () => import('./checkboxPro.vue'),
       MediumEditor: () => import('./mediumEditor.vue'),
       DatePicker: () => import('./datepicker.vue')
     },
@@ -115,37 +99,15 @@
     },
     data () {
       return {
-        isResultAlert: false,
-        isUploading: false
+        isResultAlert: false
       }
     },
     computed: {
       isLoaded: function () {
         return (this.user.hasOwnProperty('id') && this.user.id != null)
-      }
-    },
-    methods: {
-      selectNewImage: function () {
-        this.$refs.image.click()
       },
-      upload: function () {
-        this.isUploading = true
-        const url = 'https://api.imgur.com/3/image'
-        const data = new FormData()
-        data.append('image', this.$refs.image.files[0])
-
-        const config = {
-          headers: {
-            'Authorization': `Client-ID ${cfg.IMGUR.clientId}`
-          }
-        }
-        axios.post(url, data, config).then(
-          (res) => {
-            this.isUploading = false
-            this.user.picture = res.data.data.link
-            this.$refs.image.value = ''
-          }
-        )
+      clientId: function () {
+        return cfg.IMGUR.clientId
       }
     }
   }

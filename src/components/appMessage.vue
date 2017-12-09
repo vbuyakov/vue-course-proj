@@ -2,7 +2,7 @@
     <div>
         <div class="alert absolutetopright " :class="alertClass" role="alert" v-if="isShow">
             {{ msg }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close" @click="hide"><span
+            <button type="button" class="close" data-dismiss="appMessaging" aria-label="Close" @click="hide"><span
                     aria-hidden="true">×</span></button>
         </div>
     </div>
@@ -10,7 +10,7 @@
 
 <script>
   export default {
-    name: 'alert',
+    name: 'appMessage',
     data: function () {
       return {
         msg: ''

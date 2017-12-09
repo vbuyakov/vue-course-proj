@@ -5,11 +5,12 @@
 </template>
 
 <script>
-import DataTable from './DataTable.vue'
 import cfg from '@/config.js'
 
 export default {
-  components: {DataTable},
+  components: {
+    DataTable: () => import('./DataTable.vue')
+  },
   name: 'UsersList',
   computed: {
     url: function () {

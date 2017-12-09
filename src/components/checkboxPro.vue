@@ -14,10 +14,12 @@
     name: 'checkboxPro',
     props: {
       label: {
+        type: String,
         default: ''
       },
       value: {
-        default: false
+        type: Boolean,
+        required: true
       }
     },
     data: function () {

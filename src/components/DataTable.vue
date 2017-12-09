@@ -43,18 +43,17 @@
             </tbody>
         </table>
         <paginator v-bind:pages="totalPages" v-model="page"></paginator>
+        <items-on-page class="pull-left m-5-right" v-model="pagesize"></items-on-page>
     </div>
 </template>
 
 <script>
   import axios from 'axios'
-  import ItemsOnPage from './ItemsOnPage.vue'
-  import Paginator from './paginator.vue'
 
   export default {
     components: {
-      Paginator,
-      ItemsOnPage
+      Paginator: () => import('./paginator.vue'),
+      ItemsOnPage: () => import('./ItemsOnPage.vue')
     },
     name: 'DataTable',
     data: function () {
@@ -87,18 +86,21 @@
         })
       },
       deleteUser: function (id) {
-        if (confirm(`Действительно хотите удалить пользователя с ID: ${id}?`)) {
-          let deleteUrl = `${this.apiUrl}/${id}`
-          axios.delete(deleteUrl).then((res) => {
-            this.getUsers()
-            this.$store.commit('alert', {'type': 'success', 'msg': 'Пользователь успешно удалён'})
-          })
-        }
+        var confirmation = confirm(`Действительно хотите удалить пользователя с ID: ${id}?`)
+        if (!confirmation) return
+        let deleteUrl = `${this.apiUrl}/${id}`
+        axios.delete(deleteUrl).then((res) => {
+          this.$store.commit('appMessaging', {'type': 'success', 'msg': 'Пользователь успешно удалён'})
+          if ((this.totalCount - 1) / this.pagesize <= this.page - 1) {
+            this.page--
+          } else this.getUsers()
+        })
       }
     },
     watch: {
       pagesize: function () {
-        this.page = 1
+        if (this.page !== 1) this.page = 1
+        else this.getUsers()
       },
       page: function () {
         this.getUsers()

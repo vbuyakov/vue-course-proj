@@ -14,16 +14,17 @@
 
 <script>
   import axios from 'axios'
-  import UserForm from './UserForm.vue'
-
   import cfg from '@/config.js'
 
   export default {
-    components: {UserForm},
+    components: {
+      UserForm: () => import('./UserForm.vue')
+    },
     name: 'UserEdit',
     props: {
       id: {
-        required: true
+        required: true,
+        type: Number
       }
     },
     data () {
@@ -46,10 +47,10 @@
       saveUser: function () {
         axios.put(this.url, this.user).then(
           () => {
-            this.$store.commit('alert', {'type': 'success', 'msg': 'Пользователь успешно сохранен'})
+            this.$store.commit('appMessaging', {'type': 'success', 'msg': 'Пользователь успешно сохранен'})
           },
           () => {
-            this.$store.commit('alert', {'type': 'error', 'msg': 'При сохранении произошла ошибка'})
+            this.$store.commit('appMessaging', {'type': 'error', 'msg': 'При сохранении произошла ошибка'})
           })
       }
     }
